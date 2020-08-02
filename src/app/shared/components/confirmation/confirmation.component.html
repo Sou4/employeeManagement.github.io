@@ -1,0 +1,27 @@
+<div class="wrapper">
+    <span class="material-icons closeIcon" (click)="close(false)" *ngIf="this.data.actionType !== 'success'">
+        close
+    </span>
+    <div class="clearfix"></div>
+    <br>
+    <div *ngIf="this.data.actionType === 'delete'">
+        <div class="icon">
+            <span class="material-icons ">
+                delete_outline
+            </span>
+        </div>
+        <p class="message">Are you sure, <br> want to delete <strong>{{this.data.text}}</strong> record ?</p>
+        <div class="btnGroup">
+            <button class="primaryColor" (click)="close(true)">Yes</button>
+            <button class="primaryColor" (click)="close(false)">No</button>
+        </div>
+    </div>
+    <div *ngIf="this.data.actionType === 'success'">
+        <div class="icon success">
+            <span class="material-icons">
+                done
+            </span>
+        </div>
+        <p class="message">{{this.data.text}}</p>
+    </div>
+</div>

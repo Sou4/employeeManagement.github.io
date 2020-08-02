@@ -1,0 +1,42 @@
+<div class="card-container" *ngIf="empList">
+    <div *ngIf="empList.length === 0">No Employee Data !!</div>
+    <div *ngFor="let emp of empList | dateSort" class="card">
+        <div class="car-head">
+            <div class="avatar" [ngClass]="{
+                avatar1: emp.avatar === 'avatar1', 
+                avatar2: emp.avatar === 'avatar2', 
+                avatar3: emp.avatar === 'avatar3', 
+                avatar4: emp.avatar === 'avatar4', 
+                avatar5: emp.avatar === 'avatar5', 
+                avatar6: emp.avatar === 'avatar6', 
+                avatar7: emp.avatar === 'avatar7', 
+                avatar8: emp.avatar === 'avatar8', 
+                avatar9: emp.avatar === 'avatar9', 
+                avatar10: emp.avatar === 'avatar10'
+            }">{{emp.name.charAt(0).toUpperCase()}}</div>
+            <div class="spacer"></div>
+            <div class="actions">
+                <button class="circle-link" (click)="view(emp)">
+                    <span class="material-icons">
+                        visibility
+                    </span>
+                </button>
+                <button class="circle-link" (click)="edit(emp)">
+                    <span class="material-icons">
+                        edit
+                    </span>
+                </button>
+                <button class="circle-link" (click)="delete(emp)">
+                    <span class="material-icons">
+                        delete
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div>
+            <p>Name - <strong>{{emp.name}}</strong></p>
+            <p>Company Name - <strong>{{emp.companyName}}</strong></p>
+            <p>Joined Date - <strong>{{emp.dateOfJoin}}</strong></p>
+        </div>
+    </div>
+</div>

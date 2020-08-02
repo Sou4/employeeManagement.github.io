@@ -1,0 +1,83 @@
+<div [ngClass]="{empView: this.data.actionType === 'view'}">
+  <span class="material-icons closeIcon" (click)="close(false)">
+    close
+  </span>
+  <div class="clearfix"></div>
+  <br>
+  <form [formGroup]="empForm" (ngSubmit)="submit()">
+    <div class="inputGroup" [ngClass]="{alert: name.invalid && (name.dirty || name.touched)}">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter employee name.." formControlName="name"
+        [attr.disabled]="this.data.actionType === 'view' ? true : null">
+      <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alertMessage">
+        <div *ngIf="name.errors.required">- Required</div>
+      </div>
+    </div>
+
+    <div class="inputGroup" [ngClass]="{alert: companyName.invalid && (companyName.dirty || companyName.touched)}">
+      <label for="companyName">Company Name</label>
+      <input type="text" id="companyName" name="companyName" placeholder="Enter company name.."
+        formControlName="companyName" [attr.disabled]="this.data.actionType === 'view' ? true : null">
+      <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)" class="alertMessage">
+        <div *ngIf="companyName.errors.required">- Required</div>
+      </div>
+    </div>
+
+    <div class="inputGroup" [ngClass]="{alert: (emailID.invalid && (emailID.dirty || emailID.touched) || isEmailAlreadyExists)}">
+      <label for="emailID">Email</label>
+      <input type="text" id="emailID" name="emailID" placeholder="Enter employee email.." formControlName="emailID"
+        [attr.disabled]="this.data.actionType === 'view' ? true : null">
+      <div *ngIf="emailID.invalid && (emailID.dirty || emailID.touched)" class="alertMessage">
+        <div *ngIf="emailID.errors.required">- Required</div>
+        <div *ngIf="emailID.errors.email">- Invalid email</div>
+      </div>
+      <div *ngIf="isEmailAlreadyExists">- Email already exists</div>
+    </div>
+
+    <div class="inputGroup" [ngClass]="{alert: contactNo.invalid && (contactNo.dirty || contactNo.touched)}">
+      <label for="contactNo">Contact No.</label>
+      <input type="tel" id="contactNo" name="contactNo" placeholder="Enter employee contact no.."
+        formControlName="contactNo" [attr.disabled]="this.data.actionType === 'view' ? true : null">
+      <div *ngIf="contactNo.invalid && (contactNo.dirty || contactNo.touched)" class="alertMessage">
+        <div *ngIf="contactNo.errors.required">- Required</div>
+        <div *ngIf="contactNo.errors.minlength">- Contact no. must have at-least 10 digits</div>
+        <div *ngIf="contactNo.errors.pattern">- Invalid contact no.</div>
+      </div>
+    </div>
+
+    <div class="inputGroup" [ngClass]="{alert: designation.invalid && (designation.dirty || designation.touched)}">
+      <label for="designation">Designation</label>
+      <select id="designation" name="designation" formControlName="designation" *ngIf="this.data.actionType !== 'view'">
+        <option value="Associate Engineer">Associate Engineer</option>
+        <option value="Engineer">Engineer</option>
+        <option value="Senior Engineer">Senior Engineer</option>
+        <option value="Team Lead">Team Lead</option>
+        <option value="Team Lead">Associate Architect</option>
+        <option value="Team Lead">Architect</option>
+        <option value="Team Lead">Manager</option>
+      </select>
+      <input type="text" id="designation" name="designation" formControlName="designation"
+        [attr.disabled]="this.data.actionType === 'view'" *ngIf="this.data.actionType === 'view'">
+      <div *ngIf="designation.invalid && (designation.dirty || designation.touched)" class="alertMessage">
+        <div *ngIf="designation.errors.required">- Required</div>
+      </div>
+    </div>
+
+    <div class="inputGroup" [ngClass]="{alert: dateOfJoin.invalid && (dateOfJoin.dirty || dateOfJoin.touched)}">
+      <label for="dateOfJoin">Joining Date</label>
+      <input type="date" [max]="currentDate" id="dateOfJoin" name="dateOfJoin"
+        placeholder="Enter employee joining date.." formControlName="dateOfJoin"
+        *ngIf="this.data.actionType !== 'view'">
+      <input type="text" id="dateOfJoin" name="dateOfJoin" formControlName="dateOfJoin"
+        [attr.disabled]="this.data.actionType === 'view'" *ngIf="this.data.actionType === 'view'">
+      <div *ngIf="dateOfJoin.invalid && (dateOfJoin.dirty || dateOfJoin.touched)" class="alertMessage">
+        <div *ngIf="dateOfJoin.errors.required">- Required</div>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="empForm.invalid" class="primaryColor">
+      <span *ngIf="this.data.actionType === 'add'">Add new employee</span>
+      <span *ngIf="this.data.actionType === 'edit'">Update</span>
+    </button>
+  </form>
+</div>
