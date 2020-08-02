@@ -1,3 +1,7 @@
+# EmployeeManagement Demo
+
+Click [here](http://employee-management-sample.s3-website.ap-south-1.amazonaws.com/) to view in live.
+
 # EmployeeManagement
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.2.
